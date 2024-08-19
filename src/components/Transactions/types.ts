@@ -15,5 +15,8 @@ type TransactionPaneProps = {
   setTransactionApproval: SetTransactionApprovalFunction
 }
 
-export type TransactionsComponent = FunctionComponent<TransactionsProps>
+export type TransactionsComponent = React.FC<{
+  transactions: Transaction[] | null
+  updateTransactionApproval: (transactionId: string, newValue: boolean) => void
+}>
 export type TransactionPaneComponent = FunctionComponent<TransactionPaneProps>

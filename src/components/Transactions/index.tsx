@@ -4,7 +4,7 @@ import { SetTransactionApprovalParams } from "src/utils/types"
 import { TransactionPane } from "./TransactionPane"
 import { SetTransactionApprovalFunction, TransactionsComponent } from "./types"
 
-export const Transactions: TransactionsComponent = ({ transactions }) => {
+export const Transactions: TransactionsComponent = ({ transactions, updateTransactionApproval }) => {
   const { fetchWithoutCache, loading } = useCustomFetch()
 
   const setTransactionApproval = useCallback<SetTransactionApprovalFunction>(
@@ -13,9 +13,11 @@ export const Transactions: TransactionsComponent = ({ transactions }) => {
         transactionId,
         value: newValue,
       })
+      updateTransactionApproval(transactionId, newValue) // Update local state
     },
-    [fetchWithoutCache]
+    [fetchWithoutCache, updateTransactionApproval]
   )
+
 
   if (transactions === null) {
     return <div className="RampLoading--container">Loading...</div>

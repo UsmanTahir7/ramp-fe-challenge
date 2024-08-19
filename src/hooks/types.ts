@@ -18,4 +18,6 @@ export type EmployeeResult = UseTypeBaseAllResult<Employee[] | null>
 
 export type PaginatedTransactionsResult = UseTypeBaseAllResult<PaginatedResponse<Transaction[]> | null>
 
-export type TransactionsByEmployeeResult = UseTypeBaseByIdResult<Transaction[] | null>
+export type TransactionsByEmployeeResult = UseTypeBaseByIdResult<Transaction[] | null> & {
+  updateTransactionApproval: (transactionId: string, newValue: boolean) => void
+}

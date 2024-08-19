@@ -25,5 +25,15 @@ export function useTransactionsByEmployee(): TransactionsByEmployeeResult {
     setTransactionsByEmployee(null)
   }, [])
 
-  return { data: transactionsByEmployee, loading, fetchById, invalidateData }
+  const updateTransactionApproval = useCallback((transactionId: string, newValue: boolean) => {
+    setTransactionsByEmployee((prevTransactions) =>
+      prevTransactions
+        ? prevTransactions.map((transaction) =>
+            transaction.id === transactionId ? { ...transaction, approved: newValue } : transaction
+          )
+        : null
+    )
+  }, [])
+
+  return { data: transactionsByEmployee, loading, fetchById, invalidateData, updateTransactionApproval }
 }

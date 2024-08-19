@@ -76,12 +76,19 @@ export function App() {
         <div className="RampBreak--l" />
 
         <div className="RampGrid">
-          <Transactions transactions={transactions} />
+          <Transactions
+            transactions={transactions}
+            updateTransactionApproval={transactionsByEmployeeUtils.updateTransactionApproval}
+          />
 
           {transactions !== null && (
             <button
               className="RampButton"
-              disabled={paginatedTransactionsUtils.loading || paginatedTransactions?.nextPage == null || transactionsByEmployee?.length === 0}
+              disabled={
+                paginatedTransactionsUtils.loading ||
+                paginatedTransactions?.nextPage == null ||
+                transactionsByEmployee?.length === 0
+              }
               onClick={async () => {
                 await loadAllTransactions()
               }}
